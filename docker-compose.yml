@@ -1,0 +1,21 @@
+services:
+  postgres:
+    image: postgres:latest
+    container_name: portfolio-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: alberto
+      POSTGRES_PASSWORD: password123
+      POSTGRES_DB: portfolio_db
+    ports:
+      - "5432:5432"
+
+  mongodb:
+    image: mongo:latest
+    container_name: portfolio-mongodb
+    restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: alberto
+      MONGO_INITDB_ROOT_PASSWORD: password123
+    ports:
+      - "27017:27017"
