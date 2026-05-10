@@ -8,8 +8,8 @@ interface Project {
 
 export default async function ProjectsPage() {
   // Async fetch for SEO
-  const response = await fetch('http://127.0.0.1:3001/projects', { cache: 'no-store' });
-  const projects: Project[] = await response.json();
+  //const response = await fetch('http://127.0.0.1:3001/projects', { cache: 'no-store' });
+  //const projects: Project[] = await response.json();
 
   return (
     <main className="min-h-screen p-8 bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-500">
