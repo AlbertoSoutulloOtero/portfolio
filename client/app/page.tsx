@@ -1,28 +1,35 @@
-// Definimos la forma del objeto Proyecto
+import Resume from "./resume";
+
 interface Project {
   id: number;
   title: string;
   description?: string;
-  createdAt: string;
 }
 
 export default async function ProjectsPage() {
+  // Async fetch for SEO
   const response = await fetch('http://127.0.0.1:3001/projects', { cache: 'no-store' });
-  
-  // Le decimos a TypeScript que el resultado es un array de Proyectos
   const projects: Project[] = await response.json();
 
   return (
-    <main className="p-8">
-      <h1 className="text-3xl font-bold mb-6">Mis Proyectos</h1>
+    <main className="min-h-screen p-8 bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-500">
+
+      <Resume />
+
+    {/* this is going for later in other component
+    <h1 className="text-3xl font-bold mb-8">Mis Proyectos</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {projects.map((project) => (
-          <div key={project.id} className="border p-4 rounded-lg shadow">
-            <h2 className="text-xl font-semibold">{project.title}</h2>
-            <p className="text-gray-600">{project.description}</p>
-          </div>
-        ))}
-      </div>
+        {projects.length > 0 ? (
+          projects.map((project) => (
+            <div key={project.id} className="bg-custom-card p-6 rounded-custom shadow-custom border-2 border-transparent hover:border-custom-accent">
+              <h2 className="text-xl font-bold">{project.title}</h2>
+              <p className="opacity-70 mt-2">{project.description}</p>
+            </div>
+          ))
+        ) : (
+          <p>No se encontraron proyectos o la API no devolvió una lista.</p>
+        )}
+      </div> */}
     </main>
   );
 }
