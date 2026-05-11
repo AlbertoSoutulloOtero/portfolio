@@ -39,7 +39,7 @@ export default async function Resume() {
           <div className="w-20 h-1 bg-[var(--text-main)] transition-colors duration-300 mx-auto md:mx-0"></div>
         </div>
 
-        <div className="flex-1 flex justify-end w-full">
+        <div className="flex-1 flex justify-center md:justify-end w-full">
           <div className="relative group">
             <div className="w-64 h-64 md:w-80 md:h-80 border-4 border-[var(--text-main)] overflow-hidden rounded-3xl transition-all duration-500 group-hover:scale-105 shadow-[10px_10px_0px_0px_var(--text-muted)]">
               <img 
@@ -70,7 +70,7 @@ export default async function Resume() {
 
       </div>
 
-      <div className='absolute bottom-10 left-1/2 -translate-x-1/2 flex gap-8 md:gap-16 border-t border-[var(--text-main)] pt-8 w-full max-w-xl justify-center'>
+      <div className='relative mt-20 md:mt-0 md:absolute md:bottom-10 left-1/2 -translate-x-1/2 flex gap-8 md:gap-16 border-t border-[var(--text-main)] pt-8 w-full max-w-xl justify-center order-4'>
         <div className='flex flex-col items-center'>
           <span className='text-4xl md:text-5xl font-black tracking-tighter transition-all duration-500 hover:scale-110'>
             {yearsOfExperience}
