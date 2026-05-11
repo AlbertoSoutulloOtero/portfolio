@@ -11,21 +11,21 @@ async function getGithubRepos(){
 export default async function Resume() {
 
   // Calculating the years I've been programming
-  const startProgramingDate = new Date('2021-01-01');
+  const startProgramingDate = new Date('2022-01-01');
   const today = new Date();
   const yearsOfExperience = Math.floor((today.getTime() - startProgramingDate.getTime()) / (1000 * 60 * 60 * 24 * 365.25)) 
 
   //Published repositories
-  const publicRepositories = await getGithubRepos(); // test number.
+  const publicRepositories = await getGithubRepos();
 
   return (
     /* 1. Eliminamos justify-between para que no fuerce los extremos */
-    <section className="w-full min-h-[70vh] flex items-center justify-center py-20 px-4 md:px-10">
+    <section className="w-full min-h-screen flex flex-col items-center justify-center py-20 px-4 md:px-10">
       
       <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-32 max-w-7xl w-full">
 
         <div className="flex-1 space-y-7 text-center md:text-left">
-          <h1 className="text-[var(--text-main)] text-6xl md:text-8xl font-black tracking-tighter leading-none uppercase transition-all duration-500 hover:scale-95">
+          <h1 className="text-[var(--text-main)] text-6xl md:text-8xl font-black tracking-tighter leading-none uppercase transition-all duration-200 hover:scale-95">
             ALBERTO <br /> 
             <span className="text-[var(--text-muted)]">SOUTULLO</span>
           </h1>
@@ -53,12 +53,12 @@ export default async function Resume() {
 
       </div>
 
-      <div className="flex flex-wrap gap-4 pt-4 justify-center md:justify-start">
+      <div className="flex flex-wrap gap-6 justify-center w-full mt-16 md:mt-24">
 
         <a 
-          href="/tu-archivo-cv.pdf" 
-          download="/cv/CV_AlbertoSoutulloOtero.pdf"
-          className="px-8 py-3 border-2 border-[var(--text-main)] font-bold uppercase tracking-wider hover:bg-[var(--text-main)] hover:text-[var(--bg-page)] transition-all duration-300 shadow-[4px_4px_0px_0px_var(--text-muted)] active:translate-y-1 active:shadow-none">
+          href="/cv/CV_AlbertoSoutulloOtero.pdf" 
+          download="CV_AlbertoSoutulloOtero.pdf"
+          className="px-8 py-3 border-2 border-[var(--text-main)] hover:bg-[var(--text-main)] hover:text-[var(--bg-page)] font-bold uppercase tracking-wider transition-all duration-0 hover:duration-300 shadow-[4px_4px_0px_0px_var(--text-muted)] active:translate-y-1 active:shadow-none">
           Download CV
         </a>
 
@@ -82,7 +82,7 @@ export default async function Resume() {
 
         <div className='w-px h-12 bg-[var(--text-main)] hidden md:block'></div>
 
-        <div className='flex flex-col items-center'>
+        <div className='flex flex-col items-center pe-12'>
           <span className='text-4xl md:text-5xl font-black tracking-tighter transition-all duration-500 hover:scale-110'>
             {publicRepositories}
           </span>
