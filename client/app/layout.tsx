@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ThemeSwitch from "./ThemeSwitch";
+import ContactFormModals from "./contactFormModals";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,6 +35,7 @@ export default function RootLayout({
         <ThemeSwitch>
           {children}
         </ThemeSwitch>
+        <ContactFormModals/>
       </body>
     </html>
   );

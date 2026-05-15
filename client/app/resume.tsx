@@ -58,14 +58,8 @@ export default async function Resume() {
         <a 
           href="/cv/CV_AlbertoSoutulloOtero.pdf" 
           download="CV_AlbertoSoutulloOtero.pdf"
-          className="px-8 py-3 border-2 border-[var(--text-main)] hover:bg-[var(--text-main)] hover:text-[var(--bg-page)] font-bold uppercase tracking-wider transition-all duration-0 hover:duration-300 shadow-[4px_4px_0px_0px_var(--text-muted)] active:translate-y-1 active:shadow-none">
+          className="px-8 mt-10 py-3 border-2 border-[var(--text-main)] hover:bg-[var(--text-main)] hover:text-[var(--bg-page)] font-bold uppercase tracking-wider transition-all duration-0 hover:duration-300 shadow-[4px_4px_0px_0px_var(--text-muted)] active:translate-y-1 active:shadow-none">
           Download CV
-        </a>
-
-        <a 
-          href="#contact"
-          className="px-8 py-3 bg-[var(--text-main)] text-[var(--bg-page)] font-bold uppercase tracking-wider hover:bg-[var(--text-muted)] transition-all duration-300 shadow-[4px_4px_0px_0px_var(--text-muted)] active:translate-y-1 active:shadow-none">
-          Contact Me
         </a>
 
       </div>
