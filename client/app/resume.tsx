@@ -19,52 +19,60 @@ export default async function Resume() {
   const publicRepositories = await getGithubRepos();
 
   return (
-    /* 1. Eliminamos justify-between para que no fuerce los extremos */
-    <section className="w-full min-h-screen flex flex-col items-center justify-center py-20 px-4 md:px-10">
-      
-      <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-32 max-w-7xl w-full">
+    // Layout en columna sin justify-center global: el centrado vertical vive en el wrapper
+    // flex-1 inferior, y las stats quedan siempre en flujo al final (evita solapamientos en portátiles).
+    <section className="w-full min-h-screen flex flex-col items-center py-20 px-4 md:px-10">
 
-        <div className="flex-1 space-y-7 text-center md:text-left">
-          <h1 className="text-[var(--text-main)] text-6xl md:text-8xl font-black tracking-tighter leading-none uppercase transition-all duration-200 hover:scale-95">
-            ALBERTO <br /> 
-            <span className="text-[var(--text-muted)]">SOUTULLO</span>
-          </h1>
-          
-          <p className="text-[var(--text-main)] max-w-xl text-xl md:text-2xl font-light leading-relaxed text-balance mx-auto md:mx-0">
-            Full Stack Developer specialized in crafting
-            <span className="font-semibold"> minimalist</span> ,
-            <span className="font-semibold"> high-performance</span> digital experiences.
-          </p>
+      {/* flex-1 + justify-center: centra hero y botón en el espacio disponible por encima de las stats */}
+      <div className="flex-1 flex flex-col items-center justify-center w-full max-w-7xl">
 
-          <div className="w-20 h-1 bg-[var(--text-main)] transition-colors duration-300 mx-auto md:mx-0"></div>
-        </div>
+        <div className="flex flex-col md:flex-row items-center justify-center gap-16 md:gap-32 w-full">
 
-        <div className="flex-1 flex justify-center md:justify-end w-full">
-          <div className="relative group">
-            <div className="w-64 h-64 md:w-80 md:h-80 border-4 border-[var(--text-main)] overflow-hidden rounded-3xl transition-all duration-500 group-hover:scale-105 shadow-[10px_10px_0px_0px_var(--text-muted)]">
-              <img 
-                src="/images/1758801253586.jpg" 
-                alt="Tu Foto" 
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
-              />
+          <div className="flex-1 space-y-7 text-center md:text-left">
+            <h1 className="text-[var(--text-main)] text-6xl md:text-8xl font-black tracking-tighter leading-none uppercase transition-all duration-200 hover:scale-95">
+              ALBERTO <br /> 
+              <span className="text-[var(--text-muted)]">SOUTULLO</span>
+            </h1>
+            
+            <p className="text-[var(--text-main)] max-w-xl text-xl md:text-2xl font-light leading-relaxed text-balance mx-auto md:mx-0">
+              Full Stack Developer specialized in crafting
+              <span className="font-semibold"> minimalist</span> ,
+              <span className="font-semibold"> high-performance</span> digital experiences.
+            </p>
+
+            <div className="w-20 h-1 bg-[var(--text-main)] transition-colors duration-300 mx-auto md:mx-0"></div>
+          </div>
+
+          <div className="flex-1 flex justify-center md:justify-end w-full">
+            <div className="relative group">
+              <div className="w-64 h-64 md:w-80 md:h-80 border-4 border-[var(--text-main)] overflow-hidden rounded-3xl transition-all duration-500 group-hover:scale-105 shadow-[10px_10px_0px_0px_var(--text-muted)]">
+                <img 
+                  src="/images/1758801253586.jpg" 
+                  alt="Tu Foto" 
+                  className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
+                />
+              </div>
             </div>
           </div>
+
         </div>
 
+        {/* Margen único aquí (sin mt-10 duplicado en el enlace) para separar botón del hero */}
+        <div className="flex flex-wrap gap-6 justify-center w-full mt-16 md:mt-24">
+
+          <a 
+            href="/cv/CV_AlbertoSoutulloOtero.pdf" 
+            download="CV_AlbertoSoutulloOtero.pdf"
+            className="px-8 py-3 border-2 border-[var(--text-main)] hover:bg-[var(--text-main)] hover:text-[var(--bg-page)] font-bold uppercase tracking-wider transition-all duration-0 hover:duration-300 shadow-[4px_4px_0px_0px_var(--text-muted)] active:translate-y-1 active:shadow-none">
+            Download CV
+          </a>
+
+        </div>
       </div>
 
-      <div className="flex flex-wrap gap-6 justify-center w-full mt-16 md:mt-24">
-
-        <a 
-          href="/cv/CV_AlbertoSoutulloOtero.pdf" 
-          download="CV_AlbertoSoutulloOtero.pdf"
-          className="px-8 mt-10 py-3 border-2 border-[var(--text-main)] hover:bg-[var(--text-main)] hover:text-[var(--bg-page)] font-bold uppercase tracking-wider transition-all duration-0 hover:duration-300 shadow-[4px_4px_0px_0px_var(--text-muted)] active:translate-y-1 active:shadow-none">
-          Download CV
-        </a>
-
-      </div>
-
-      <div className='relative mt-20 md:mt-0 md:absolute md:bottom-10 left-1/2 -translate-x-1/2 flex gap-8 md:gap-16 border-t border-[var(--text-main)] pt-8 w-full max-w-xl justify-center order-4'>
+      {/* Antes: md:absolute md:bottom-10 sacaba este bloque del flujo y se montaba sobre el botón en 1080p.
+          Ahora: flex-shrink-0 + márgenes responsivos; el botón empuja este contenedor hacia abajo de forma natural. */}
+      <div className='flex-shrink-0 mt-12 md:mt-16 lg:mt-20 flex gap-8 md:gap-16 border-t border-[var(--text-main)] pt-8 w-full max-w-xl justify-center'>
         <div className='flex flex-col items-center'>
           <span className='text-4xl md:text-5xl font-black tracking-tighter transition-all duration-500 hover:scale-110'>
             {yearsOfExperience}
