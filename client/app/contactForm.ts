@@ -25,6 +25,16 @@ export async function sendContactForm(formData: ContactFormData): Promise<ApiRes
       body: JSON.stringify(formData),
     });
 
+    const contentType = response.headers.get('content-type') ?? '';
+    const isJson = contentType.includes('application/json');
+
+    if (!isJson) {
+      return {
+        success: false,
+        error: 'El servidor no respondió correctamente. Comprueba que la API esté configurada.',
+      };
+    }
+
     const data = await response.json();
 
     if (!response.ok) {
