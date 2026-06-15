@@ -9,7 +9,7 @@ html {
   --foreground: #171717;*/
 
   --bg-page: #ffffff;
-  --bg-card: rgba(255, 255, 255, 0.7);
+  --bg-card: rgba(157, 157, 157, 0.7);
   --text-main: #000000;
   --text-muted: #86868b; 
   --accent: #0071e3;
@@ -21,7 +21,7 @@ html {
 
 [data-theme='dark'] {
   --bg-page: #000000;
-  --bg-card: #000000;
+  --bg-card: rgba(44, 44, 44, 0.7);
   --text-main: #ffffff;
   --text-muted: rgba(255, 255, 255, 0.7);
   --accent: #ffff00;

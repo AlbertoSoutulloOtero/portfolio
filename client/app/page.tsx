@@ -1,4 +1,5 @@
 import Resume from "./resume";
+import TechCarousel from "./TechCarousel";
 
 interface Project {
   id: number;
@@ -15,6 +16,8 @@ export default async function ProjectsPage() {
     <main className="min-h-screen p-8 bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-500">
 
       <Resume />
+
+      <TechCarousel />
 
     {/* this is going for later in other component
     <h1 className="text-3xl font-bold mb-8">Mis Proyectos</h1>
