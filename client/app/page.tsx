@@ -13,7 +13,7 @@ export default async function ProjectsPage() {
   //const projects: Project[] = await response.json();
 
   return (
-    <main className="min-h-screen p-8 bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-500">
+    <main className="min-h-screen bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-500">
 
       <Resume />
 
