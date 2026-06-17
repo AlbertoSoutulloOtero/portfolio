@@ -41,7 +41,7 @@ export default function ContactFormModals() {
     } else {
       setStatus({ 
         loading: false, 
-        error: result.error || 'Algo salió mal al enviar el formulario.' 
+        error: result.error || 'Something went wrong while sending the form.' 
       });
     }
   };
@@ -71,13 +71,13 @@ export default function ContactFormModals() {
 
         {step === 1 && (
           <div>
-            <h3 className="text-xl font-black uppercase tracking-tight mb-2">¿What is your name?</h3>
-            <p className="text-sm text-[var(--text-muted)] mb-4">Introduce tu nombre o el de tu empresa.</p>
+            <h3 className="text-xl font-black uppercase tracking-tight mb-2">What is your name?</h3>
+            <p className="text-sm text-[var(--text-muted)] mb-4">Your name or your company&apos;s name.</p>
             <input 
               type="text" 
               value={formData.name}
               onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Ej. John Doe"
+              placeholder="e.g. John Doe"
               className={inputClass}
             />
             <button 
@@ -85,32 +85,32 @@ export default function ContactFormModals() {
               onClick={nextStep} 
               className={`w-full mt-6 ${primaryBtnClass}`}
             >
-              SIGUIENTE →
+              NEXT →
             </button>
           </div>
         )}
 
         {step === 2 && (
           <div>
-            <h3 className="text-xl font-black uppercase tracking-tight mb-2">¿Cuál es tu email?</h3>
-            <p className="text-sm text-[var(--text-muted)] mb-4">Te responderé a esta dirección.</p>
+            <h3 className="text-xl font-black uppercase tracking-tight mb-2">What is your email?</h3>
+            <p className="text-sm text-[var(--text-muted)] mb-4">I&apos;ll reply to this address.</p>
             <input 
               type="email" 
               value={formData.email}
               onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="ejemplo@correo.com"
+              placeholder="example@email.com"
               className={inputClass}
             />
             <div className="flex gap-4 mt-6">
               <button onClick={prevStep} className={`w-1/3 ${secondaryBtnClass}`}>
-                ATRÁS
+                BACK
               </button>
               <button 
                 disabled={!formData.email.includes('@')} 
                 onClick={nextStep} 
                 className={`w-2/3 ${primaryBtnClass}`}
               >
-                SIGUIENTE →
+                NEXT →
               </button>
             </div>
           </div>
@@ -118,26 +118,33 @@ export default function ContactFormModals() {
 
         {step === 3 && (
           <div>
-            <h3 className="text-xl font-black uppercase tracking-tight mb-2">Cuéntame tu idea</h3>
-            <p className="text-sm text-[var(--text-muted)] mb-4">¿En qué proyecto estás pensando?</p>
+            <h3 className="text-xl font-black uppercase tracking-tight mb-2">Tell me your idea</h3>
+            <p className="text-sm text-[var(--text-muted)] mb-4">What project are you thinking about?</p>
             <textarea 
               rows={4}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
-              placeholder="Escribe aquí los detalles del proyecto..."
+              placeholder="Write the project details here..."
               className={`${inputClass} resize-none`}
             />
             {status.error && <p className="text-red-500 font-bold text-xs mt-2">❌ {status.error}</p>}
             <div className="flex gap-4 mt-6">
               <button onClick={prevStep} disabled={status.loading} className={`w-1/3 ${secondaryBtnClass} disabled:opacity-50`}>
-                ATRÁS
+                BACK
               </button>
               <button 
                 disabled={!formData.description.trim() || status.loading} 
                 onClick={handleSubmit} 
                 className={`w-2/3 ${primaryBtnClass}`}
               >
-                {status.loading ? 'ENVIANDO...' : 'ENVIAR MENSAJE 🚀'}
+                {status.loading ? 'SENDING...' : (
+                  <span className="flex items-center justify-center gap-2">
+                    SEND
+                    <svg xmlns="http://www.w3.org/2000/svg" height="20px" viewBox="0 -960 960 960" width="20px" fill="currentColor">
+                      <path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/>
+                    </svg>
+                  </span>
+                )}
               </button>
             </div>
           </div>
@@ -146,14 +153,8 @@ export default function ContactFormModals() {
         {step === 4 && (
           <div className="text-center py-4">
             <div className="text-4xl mb-4">🎉</div>
-            <h3 className="text-2xl font-black uppercase tracking-tight mb-2">¡Todo listo!</h3>
-            <p className="text-sm text-[var(--text-muted)] mb-6">El mensaje se ha enviado correctamente. Te responderé lo antes posible.</p>
-            <button 
-              onClick={() => { setIsOpen(false); setStep(1); setFormData({ name: '', email: '', description: '' }); }} 
-              className={`px-6 py-3 ${primaryBtnClass}`}
-            >
-              CERRAR WINDOWS
-            </button>
+            <h3 className="text-2xl font-black uppercase tracking-tight mb-2">All set!</h3>
+            <p className="text-sm text-[var(--text-muted)] mb-6">Your message has been sent successfully. I&apos;ll get back to you as soon as possible.</p>
           </div>
         )}
 
