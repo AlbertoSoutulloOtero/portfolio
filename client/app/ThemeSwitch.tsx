@@ -89,7 +89,7 @@ export default function ThemeSwitch({ children }: { children: React.ReactNode })
         </button>
 
         {/* 4th button: dropdown menu for sections */}
-        <div data-dropdown className="relative flex items-center justify-center">
+        <div data-dropdown className="relative flex items-center justify-center hidden md:flex">
           {SECTIONS.map((section, i) => {
             const offset = -(i + 1) * 60;
             return (
