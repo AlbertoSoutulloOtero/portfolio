@@ -21,7 +21,7 @@ export default async function Resume() {
   return (
     // Layout en columna sin justify-center global: el centrado vertical vive en el wrapper
     // flex-1 inferior, y las stats quedan siempre en flujo al final (evita solapamientos en portátiles).
-    <section className="w-full min-h-screen flex flex-col items-center py-20 px-4 md:px-10">
+    <section id="resume" className="w-full min-h-screen flex flex-col items-center py-16 px-4 md:px-10">
 
       {/* flex-1 + justify-center: centra hero y botón en el espacio disponible por encima de las stats */}
       <div className="flex-1 flex flex-col items-center justify-center w-full max-w-7xl">
@@ -58,7 +58,7 @@ export default async function Resume() {
         </div>
 
         {/* Margen único aquí (sin mt-10 duplicado en el enlace) para separar botón del hero */}
-        <div className="flex flex-wrap gap-6 justify-center w-full mt-16 md:mt-24">
+        <div className="flex flex-wrap gap-6 justify-center w-full mt-8 md:mt-24">
 
           <a 
             href="/cv/CV_AlbertoSoutulloOtero.pdf" 
@@ -72,7 +72,7 @@ export default async function Resume() {
 
       {/* Antes: md:absolute md:bottom-10 sacaba este bloque del flujo y se montaba sobre el botón en 1080p.
           Ahora: flex-shrink-0 + márgenes responsivos; el botón empuja este contenedor hacia abajo de forma natural. */}
-      <div className='flex-shrink-0 mt-12 md:mt-16 lg:mt-20 flex gap-8 md:gap-16 border-t border-[var(--text-main)] pt-8 w-full max-w-xl justify-center'>
+      <div className='flex-shrink-0 mt-8 md:mt-12 lg:mt-16 flex gap-8 md:gap-16 border-t border-[var(--text-main)] pt-8 w-full max-w-xl justify-center'>
         <div className='flex flex-col items-center'>
           <span className='text-4xl md:text-5xl font-black tracking-tighter transition-all duration-500 hover:scale-110'>
             {yearsOfExperience}

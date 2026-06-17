@@ -1,5 +1,7 @@
 import Resume from "./resume";
 import TechCarousel from "./TechCarousel";
+import Whoami from "./whoami";
+import Projects from "./projects";
 
 interface Project {
   id: number;
@@ -17,7 +19,11 @@ export default async function ProjectsPage() {
 
       <Resume />
 
+      <Whoami />
+
       <TechCarousel />
+
+      <Projects />
 
     {/* this is going for later in other component
     <h1 className="text-3xl font-bold mb-8">Mis Proyectos</h1>

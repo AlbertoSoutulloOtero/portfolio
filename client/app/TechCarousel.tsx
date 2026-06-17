@@ -2,9 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 
-// Tecnologías ampliadas y sincronizadas con tu Github Tech Stack
 const DEFAULT_TECHS = [
-  // --- Frontend ---
   { name: 'React', category: 'Front-end framework', icon: '⚛️' },
   { name: 'Next.js', category: 'Front-end framework', icon: '▲' },
   { name: 'Vue.js', category: 'Front-end framework', icon: '💚' },
@@ -13,92 +11,103 @@ const DEFAULT_TECHS = [
   { name: 'HTML5', category: 'Markup language', icon: '🧱' },
   { name: 'CSS3', category: 'Style language', icon: '🎨' },
   { name: 'Tailwind CSS', category: 'Style language', icon: '💨' },
-
-  // --- Backend & Frameworks ---
   { name: 'NestJS', category: 'Back-end framework', icon: '🐱' },
   { name: 'Symfony', category: 'Back-end framework', icon: '🎼' },
   { name: 'Java', category: 'Back-end language', icon: '☕' },
   { name: 'PHP', category: 'Back-end language', icon: '🐘' },
-
-  // --- Runtime environments ---
   { name: 'Node.js', category: 'JS Runtime-Environment', icon: '🌱' },
-
-  // --- Databases & Tools ---
   { name: 'PostgreSQL', category: 'Database', icon: '🐘' },
   { name: 'MongoDB', category: 'Database', icon: '🍃' },
   { name: 'Docker', category: 'DevOps-Composer', icon: '🐳' },
   { name: 'Git', category: 'Version Control', icon: '🌿' },
 ];
 
-export default function TechCarousel() {
-  const scrollContainerRef = useRef<HTMLDivElement>(null);
+const GROUP_MAP: Record<string, string> = {
+  React: 'Frontend',
+  'Next.js': 'Frontend',
+  'Vue.js': 'Frontend',
+  TypeScript: 'Frontend',
+  JavaScript: 'Frontend',
+  HTML5: 'Frontend',
+  CSS3: 'Frontend',
+  'Tailwind CSS': 'Frontend',
+  NestJS: 'Backend',
+  Symfony: 'Backend',
+  Java: 'Backend',
+  PHP: 'Backend',
+  'Node.js': 'Backend',
+  PostgreSQL: 'DB & Version control',
+  MongoDB: 'DB & Version control',
+  Docker: 'DB & Version control',
+  Git: 'DB & Version control',
+};
+
+function groupByCategory(techs: typeof DEFAULT_TECHS) {
+  const groups: Record<string, typeof DEFAULT_TECHS> = {};
+  for (const tech of techs) {
+    const key = GROUP_MAP[tech.name];
+    if (!groups[key]) {
+      groups[key] = [];
+    }
+    groups[key].push(tech);
+  }
+  return Object.entries(groups);
+}
+
+function CarouselRow({ category, techs }: { category: string; techs: typeof DEFAULT_TECHS }) {
+  const ref = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const startX = useRef(0);
   const scrollLeftStart = useRef(0);
 
-  // Manejo de arrastrar con el ratón (Drag-to-Scroll)
   const handleMouseDown = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!scrollContainerRef.current) return;
+    if (!ref.current) return;
     setIsDragging(true);
-    // Guardamos la posición inicial del ratón y el scroll actual
-    startX.current = e.pageX - scrollContainerRef.current.offsetLeft;
-    scrollLeftStart.current = scrollContainerRef.current.scrollLeft;
-
-    // Desactivamos temporalmente el efecto suave y el auto-snap para que el arrastre sea instantáneo y natural
-    scrollContainerRef.current.style.scrollBehavior = 'auto';
-    scrollContainerRef.current.style.scrollSnapType = 'none';
+    startX.current = e.pageX - ref.current.offsetLeft;
+    scrollLeftStart.current = ref.current.scrollLeft;
+    ref.current.style.scrollBehavior = 'auto';
+    ref.current.style.scrollSnapType = 'none';
   };
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!isDragging || !scrollContainerRef.current) return;
-    e.preventDefault(); // Evita selecciones de texto molestas al arrastrar
-    const x = e.pageX - scrollContainerRef.current.offsetLeft;
-    // Multiplicamos por 1.5 para darle más reactividad y velocidad al arrastre
-    const walk = (x - startX.current) * 1.5; 
-    scrollContainerRef.current.scrollLeft = scrollLeftStart.current - walk;
+    if (!isDragging || !ref.current) return;
+    e.preventDefault();
+    const x = e.pageX - ref.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    ref.current.scrollLeft = scrollLeftStart.current - walk;
   };
 
   const handleMouseUpOrLeave = () => {
-    if (!isDragging || !scrollContainerRef.current) return;
+    if (!isDragging || !ref.current) return;
     setIsDragging(false);
-
-    // Al soltar el ratón, reactivamos el scroll suave y el snap-snap para que se alinee perfectamente
-    scrollContainerRef.current.style.scrollBehavior = 'smooth';
-    scrollContainerRef.current.style.scrollSnapType = 'x mandatory';
+    ref.current.style.scrollBehavior = 'smooth';
+    ref.current.style.scrollSnapType = 'x mandatory';
   };
 
   return (
-    <section className="w-full py-20 px-4 md:px-10 flex flex-col items-center bg-[var(--bg-card)] text-[var(--text-main)] transition-colors duration-500">
-      <div className="w-full max-w-7xl text-center md:text-left mb-12">
-        <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase mb-4">
-          Technologies
-        </h2>
-        <p className="text-lg md:text-xl font-light text-[var(--text-muted)] max-w-2xl">
-          A showcase of the tools and languages I work with.
-        </p>
+    <div className="w-full max-w-7xl mb-8">
+      <div className="px-4">
+        <h3 className="text-xl md:text-2xl font-bold tracking-tight mb-4 text-[var(--text-main)]">
+          {category}
+        </h3>
       </div>
-
-      {/* Contenedor del Carrusel / Fila de Elementos */}
-      <div className="w-full max-w-7xl relative overflow-hidden py-4">
+      <div className="relative overflow-hidden">
         <div
-          ref={scrollContainerRef}
+          ref={ref}
           onMouseDown={handleMouseDown}
           onMouseMove={handleMouseMove}
           onMouseUp={handleMouseUpOrLeave}
           onMouseLeave={handleMouseUpOrLeave}
-          className={`flex gap-6 overflow-x-auto pb-8 pt-4 px-4 scroll-smooth snap-x snap-mandatory custom-scrollbar select-none ${
+          className={`flex gap-6 overflow-x-auto py-2 px-4 scroll-smooth snap-x snap-mandatory carousel-row select-none ${
             isDragging ? 'cursor-grabbing' : 'cursor-grab'
           }`}
           style={{
-            // Ayuda a prevenir que se arrastren imágenes nativas o elementos al mover
             userSelect: 'none',
             WebkitUserSelect: 'none',
           }}
         >
-          {DEFAULT_TECHS.map((tech, index) => {
-            // El color de fondo se intercala usando var(--bg-card) para los pares y transparente para los impares.
+          {techs.map((tech, index) => {
             const isEven = index % 2 === 0;
-
             return (
               <div
                 key={tech.name}
@@ -115,9 +124,9 @@ export default function TechCarousel() {
                     {tech.icon}
                   </span>
                   <div>
-                    <h3 className="text-xl font-bold tracking-tight text-[var(--text-main)]">
+                    <h4 className="text-xl font-bold tracking-tight text-[var(--text-main)]">
                       {tech.name}
-                    </h3>
+                    </h4>
                     <p className="text-sm font-medium uppercase tracking-wider text-[var(--text-muted)] mt-1">
                       {tech.category}
                     </p>
@@ -128,30 +137,35 @@ export default function TechCarousel() {
           })}
         </div>
       </div>
+    </div>
+  );
+}
 
-      {/* Inyección de estilos para una barra de desplazamiento minimalista y elegante */}
+export default function TechCarousel() {
+  const groups = groupByCategory(DEFAULT_TECHS);
+
+  return (
+    <section id="tech" className="w-full py-20 px-4 md:px-10 flex flex-col items-center bg-[var(--bg-page)] text-[var(--text-main)] transition-colors duration-500">
+      <div className="w-full max-w-7xl text-center md:text-left mb-8 px-4">
+        <h2 className="text-4xl md:text-5xl font-black tracking-tighter uppercase mb-4">
+          Technologies
+        </h2>
+        <p className="text-lg md:text-xl font-light text-[var(--text-muted)] max-w-2xl">
+          A showcase of the tools and languages I work(ed) with.
+        </p>
+      </div>
+
+      {groups.map(([category, techs]) => (
+        <CarouselRow key={category} category={category} techs={techs} />
+      ))}
+
       <style jsx global>{`
-        .custom-scrollbar::-webkit-scrollbar {
-          height: 8px;
+        .carousel-row::-webkit-scrollbar {
+          display: none;
         }
-        .custom-scrollbar::-webkit-scrollbar-track {
-          background: rgba(0, 0, 0, 0.05);
-          border-radius: 9999px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: var(--text-muted);
-          opacity: 0.5;
-          border-radius: 9999px;
-          transition: background 0.2s ease;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: var(--text-main);
-        }
-        
-        /* Soporte para Firefox */
-        .custom-scrollbar {
-          scrollbar-width: thin;
-          scrollbar-color: var(--text-muted) rgba(0, 0, 0, 0.05);
+        .carousel-row {
+          scrollbar-width: none;
+          -ms-overflow-style: none;
         }
       `}</style>
     </section>
