@@ -50,7 +50,7 @@ export default function Projects() {
                   index % 2 !== 0 ? 'md:flex-row-reverse' : ''
                 }`}
               >
-                <div className="flex-1 w-full space-y-4 text-center md:text-left">
+                <div className={`flex-1 w-full space-y-4 text-center ${index % 2 !== 0 ? 'md:text-right' : 'md:text-left'}`}>
                   <h3 className="text-2xl md:text-3xl font-bold tracking-tight">
                     {project.title}
                   </h3>

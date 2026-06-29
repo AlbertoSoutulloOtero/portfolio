@@ -54,7 +54,7 @@ function groupByCategory(techs: typeof DEFAULT_TECHS) {
   return Object.entries(groups);
 }
 
-function CarouselRow({ category, techs }: { category: string; techs: typeof DEFAULT_TECHS }) {
+function CarouselRow({ category, techs, reverse }: { category: string; techs: typeof DEFAULT_TECHS; reverse?: boolean }) {
   const ref = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
   const startX = useRef(0);
@@ -107,7 +107,7 @@ function CarouselRow({ category, techs }: { category: string; techs: typeof DEFA
           }}
         >
           {techs.map((tech, index) => {
-            const isEven = index % 2 === 0;
+            const isEven = reverse ? index % 2 !== 0 : index % 2 === 0;
             return (
               <div
                 key={tech.name}
@@ -155,8 +155,8 @@ export default function TechCarousel() {
         </p>
       </div>
 
-      {groups.map(([category, techs]) => (
-        <CarouselRow key={category} category={category} techs={techs} />
+      {groups.map(([category, techs], groupIndex) => (
+        <CarouselRow key={category} category={category} techs={techs} reverse={groupIndex === 1} />
       ))}
 
       <style jsx global>{`

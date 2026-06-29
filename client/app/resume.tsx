@@ -5,7 +5,7 @@ async function getGithubRepos(){
   const res = await fetch('https://api.github.com/users/AlbertoSoutulloOtero', {next: {revalidate: 3600}});
   if(!res.ok) return 0;
   const data = await res.json();
-  return data.public_repos;
+  return Math.max(0, data.public_repos - 2);
 }
 
 export default async function Resume() {
