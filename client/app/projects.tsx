@@ -6,7 +6,7 @@ const PROJECTS = [
   {
     title: 'Dante´s Memories',
     description:
-      '"A demo of a game where you play as a vampire trying to survive the demons that betrayed you. Built with Unity and C#.',
+      'A demo of a game where you play as a vampire trying to survive the demons that betrayed you. Built with Unity and C#.',
     image: '/images/danteshud.png',
     githubUrl: 'https://github.com/AlbertoSoutulloOtero/DantesMemoriesJuego',
   },
@@ -16,6 +16,13 @@ const PROJECTS = [
       'A full-featured e-commerce example for selling posters and masks, built as a modular template that can easily adapt to any product catalog.',
     image: '/images/northgz.png',
     githubUrl: 'https://github.com/AlbertoSoutulloOtero/northgz',
+  },
+  {
+    title: 'Notify-wa',
+    description:
+      'Node.js/TypeScript CLI tool that runs terminal commands and sends WhatsApp notifications on completion via whatsapp-web.js + Puppeteer (WhatsApp Web API).',
+    image: '/images/notifywa.png',
+    githubUrl: 'https://github.com/AlbertoSoutulloOtero/notify-wa',
   },
 ];
 
